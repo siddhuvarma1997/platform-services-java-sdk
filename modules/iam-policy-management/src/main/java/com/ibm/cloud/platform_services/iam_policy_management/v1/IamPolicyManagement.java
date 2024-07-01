@@ -12,7 +12,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.88.0-b0b4c159-20240402-205910
+ * IBM OpenAPI SDK Code Generator Version: 3.90.1-64fd3296-20240515-180710
  */
 
 package com.ibm.cloud.platform_services.iam_policy_management.v1;
@@ -34,6 +34,7 @@ import com.ibm.cloud.platform_services.iam_policy_management.v1.model.DeletePoli
 import com.ibm.cloud.platform_services.iam_policy_management.v1.model.DeleteRoleOptions;
 import com.ibm.cloud.platform_services.iam_policy_management.v1.model.DeleteV2PolicyOptions;
 import com.ibm.cloud.platform_services.iam_policy_management.v1.model.GetPolicyAssignmentOptions;
+import com.ibm.cloud.platform_services.iam_policy_management.v1.model.GetPolicyAssignmentResponse;
 import com.ibm.cloud.platform_services.iam_policy_management.v1.model.GetPolicyOptions;
 import com.ibm.cloud.platform_services.iam_policy_management.v1.model.GetPolicyTemplateOptions;
 import com.ibm.cloud.platform_services.iam_policy_management.v1.model.GetPolicyTemplateVersionOptions;
@@ -1371,9 +1372,9 @@ public class IamPolicyManagement extends BaseService {
    * groups that you specify.
    *
    * @param createPolicyTemplateAssignmentOptions the {@link CreatePolicyTemplateAssignmentOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link PolicyAssignmentV1Collection}
+   * @return a {@link ServiceCall} with a result of type {@link PolicyAssignmentV1}
    */
-  public ServiceCall<PolicyAssignmentV1Collection> createPolicyTemplateAssignment(CreatePolicyTemplateAssignmentOptions createPolicyTemplateAssignmentOptions) {
+  public ServiceCall<PolicyAssignmentV1> createPolicyTemplateAssignment(CreatePolicyTemplateAssignmentOptions createPolicyTemplateAssignmentOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createPolicyTemplateAssignmentOptions,
       "createPolicyTemplateAssignmentOptions cannot be null");
     RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/policy_assignments"));
@@ -1388,11 +1389,10 @@ public class IamPolicyManagement extends BaseService {
     builder.query("version", String.valueOf(createPolicyTemplateAssignmentOptions.version()));
     final JsonObject contentJson = new JsonObject();
     contentJson.add("target", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createPolicyTemplateAssignmentOptions.target()));
-    contentJson.add("options", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createPolicyTemplateAssignmentOptions.options()));
     contentJson.add("templates", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createPolicyTemplateAssignmentOptions.templates()));
     builder.bodyJson(contentJson);
-    ResponseConverter<PolicyAssignmentV1Collection> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<PolicyAssignmentV1Collection>() { }.getType());
+    ResponseConverter<PolicyAssignmentV1> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<PolicyAssignmentV1>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -1402,9 +1402,9 @@ public class IamPolicyManagement extends BaseService {
    * Retrieve a policy template assignment by providing a policy assignment ID.
    *
    * @param getPolicyAssignmentOptions the {@link GetPolicyAssignmentOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link PolicyAssignmentV1}
+   * @return a {@link ServiceCall} with a result of type {@link GetPolicyAssignmentResponse}
    */
-  public ServiceCall<PolicyAssignmentV1> getPolicyAssignment(GetPolicyAssignmentOptions getPolicyAssignmentOptions) {
+  public ServiceCall<GetPolicyAssignmentResponse> getPolicyAssignment(GetPolicyAssignmentOptions getPolicyAssignmentOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getPolicyAssignmentOptions,
       "getPolicyAssignmentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -1416,8 +1416,8 @@ public class IamPolicyManagement extends BaseService {
     }
     builder.header("Accept", "application/json");
     builder.query("version", String.valueOf(getPolicyAssignmentOptions.version()));
-    ResponseConverter<PolicyAssignmentV1> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<PolicyAssignmentV1>() { }.getType());
+    ResponseConverter<GetPolicyAssignmentResponse> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<GetPolicyAssignmentResponse>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
